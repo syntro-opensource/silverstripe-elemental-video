@@ -175,17 +175,18 @@ class Video extends BaseElement
             ]
         );
 
+        // TODO: remove phpstan ignore after this is correctly solved: https://github.com/syntro-opensource/silverstripe-phpstan/issues/9
         $thumbnailField
             ->setFolderName('videos/covers')
             ->setAllowedMaxFileNumber(1)
-            ->hideIf('VideoType')->isEqualTo('youtube');
+            ->hideIf('VideoType')->isEqualTo('youtube'); /** @phpstan-ignore-line */
         $fileField
             ->setFolderName('videos')
             ->setAllowedExtensions(['mpeg','mp4', 'webm'])
             ->setAllowedMaxFileNumber(1)
-            ->hideIf('VideoType')->isEqualTo('youtube');
+            ->hideIf('VideoType')->isEqualTo('youtube'); /** @phpstan-ignore-line */
         $urlField
-            ->hideIf('VideoType')->isEqualTo('local');
+            ->hideIf('VideoType')->isEqualTo('local'); /** @phpstan-ignore-line */
 
         $hideablefields = $this->config()->get('hide_field_for_style');
         foreach ($hideablefields as $field => $hideForStyles) {
