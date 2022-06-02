@@ -13,7 +13,6 @@ use SilverStripe\Assets\File;
 use SilverStripe\ORM\ValidationResult;
 use DNADesign\Elemental\Models\BaseElement;
 
-
 /**
  * llows the user to add a video from a spcified source
  *
@@ -94,6 +93,7 @@ class Video extends BaseElement
 
     /**
      * Add default values to database
+     * @config
      *  @var array
      */
     private static $defaults = [
@@ -105,6 +105,7 @@ class Video extends BaseElement
 
     /**
      * Has_one relationship
+     * @config
      * @var array
      */
     private static $has_one = [
@@ -114,6 +115,7 @@ class Video extends BaseElement
 
     /**
      * Relationship version ownership
+     * @config
      * @var array
      */
     private static $owns = [
