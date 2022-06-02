@@ -1,0 +1,15 @@
+de:
+  Syntro\SilverstripeElementalVideo\Element\Video:
+    VIDEOTYPETITLE: Video Typ
+    VIDEOTYPELOCAL: Lokal
+    VIDEOTYPEYOUTUBE: Youtube
+    AUTOPLAYTITLE: Autoplay
+    SHOWCONTROLSTITLE: Steuerung anzeigen
+    LOOPTITLE: Loop
+    VIDEOURLTITLE: Video URL
+    VIDEOTITLE: Video
+    COVERTITLE: Cover
+    BlockType: Video
+    NOVIDEOSUMMARY: kein Video
+    YTVIDEOURLERROR: Bitte gib eine gültige Youtube URL ein
+    VIDEOTYPEERROR: Ungültiger Videotyp
