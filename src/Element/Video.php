@@ -13,7 +13,6 @@ use SilverStripe\Assets\File;
 use SilverStripe\ORM\ValidationResult;
 use DNADesign\Elemental\Models\BaseElement;
 
-
 /**
  * llows the user to add a video from a spcified source
  *
@@ -94,6 +93,7 @@ class Video extends BaseElement
 
     /**
      * Add default values to database
+     * @config
      *  @var array
      */
     private static $defaults = [
@@ -105,6 +105,7 @@ class Video extends BaseElement
 
     /**
      * Has_one relationship
+     * @config
      * @var array
      */
     private static $has_one = [
@@ -114,6 +115,7 @@ class Video extends BaseElement
 
     /**
      * Relationship version ownership
+     * @config
      * @var array
      */
     private static $owns = [
@@ -138,48 +140,52 @@ class Video extends BaseElement
             [
                 $typeField = OptionsetField::create(
                     'VideoType',
-                    'Video Type',
-                    ['local' => 'Local', 'youtube' => 'Youtube']
+                    _t(__CLASS__ . '.VIDEOTYPETITLE', 'Video Type'),
+                    [
+                        'local' => _t(__CLASS__ . '.VIDEOTYPELOCAL', 'Local'),
+                        'youtube' => _t(__CLASS__ . '.VIDEOTYPEYOUTUBE', 'Youtube')
+                    ]
                 ),
                 FieldGroup::create([
                     CheckboxField::create(
                         'Autoplay',
-                        'Autoplay'
+                        _t(__CLASS__ . '.AUTOPLAYTITLE', 'Autoplay')
                     ),
                     CheckboxField::create(
                         'ShowControls',
-                        'Show Controls'
+                        _t(__CLASS__ . '.SHOWCONTROLSTITLE', 'Show Controls')
                     ),
                     CheckboxField::create(
                         'Loop',
-                        'Loop'
+                        _t(__CLASS__ . '.LOOPTITLE', 'Loop')
                     ),
                 ]),
                 $urlField = TextField::create(
                     'VideoURL',
-                    'Video URL'
+                    _t(__CLASS__ . '.VIDEOURLTITLE', 'Video URL')
                 ),
                 $fileField = UploadField::create(
                     'Video',
-                    'Video'
+                    _t(__CLASS__ . '.VIDEOTITLE', 'Video')
                 ),
                 $thumbnailField = UploadField::create(
                     'Cover',
-                    'Cover Image'
+                    _t(__CLASS__ . '.COVERTITLE', 'Cover Image')
                 ),
             ]
         );
 
-        $thumbnailField
+        // TODO: remove phpstan ignore after this is correctly solved: https://github.com/syntro-opensource/silverstripe-phpstan/issues/9
+        $thumbnailField /** @phpstan-ignore-line */
             ->setFolderName('videos/covers')
             ->setAllowedMaxFileNumber(1)
             ->hideIf('VideoType')->isEqualTo('youtube');
-        $fileField
+        $fileField /** @phpstan-ignore-line */
             ->setFolderName('videos')
             ->setAllowedExtensions(['mpeg','mp4', 'webm'])
             ->setAllowedMaxFileNumber(1)
             ->hideIf('VideoType')->isEqualTo('youtube');
-        $urlField
+        $urlField /** @phpstan-ignore-line */
             ->hideIf('VideoType')->isEqualTo('local');
 
         $hideablefields = $this->config()->get('hide_field_for_style');
@@ -208,7 +214,11 @@ class Video extends BaseElement
     protected function provideBlockSchema()
     {
         $blockSchema = parent::provideBlockSchema();
-        $blockSchema['content'] = 'A Video';
+        if ($this->VideoType == 'local') {
+            $blockSchema['content'] = $this->VideoID != 0 ? $this->Video->Filename : _t(__CLASS__ . '.NOVIDEOSUMMARY', 'no Video');
+        } else {
+            $blockSchema['content'] = $this->VideoURL ? $this->VideoURL : _t(__CLASS__ . '.NOVIDEOSUMMARY', 'no Video');
+        }
         return $blockSchema;
     }
 
@@ -223,13 +233,13 @@ class Video extends BaseElement
         switch ($this->VideoType) {
             case 'youtube':
                 if ($this->VideoURL && !$this->isYTVideo($this->VideoURL)) {
-                    $result->addFieldError('VideoURL', 'Please enter a valid URL from Youtube');
+                    $result->addFieldError('VideoURL', _t(__CLASS__ . '.YTVIDEOURLERROR', 'Please enter a valid URL from Youtube'));
                 }
                 break;
             case 'local':
                 break;
             default:
-                $result->addFieldError('VideoType', 'Invalid video type.');
+                $result->addFieldError('VideoType', _t(__CLASS__ . '.VIDEOTYPEERROR', 'Invalid video type.'));
                 break;
         }
         return $result;
