@@ -1,0 +1,2 @@
+includes:
+    - vendor/syntro/silverstripe-phpstan/phpstan.neon
