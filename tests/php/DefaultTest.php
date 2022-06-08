@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SilverstripeElementalElementals\Tests;
+namespace Syntro\SilverstripeElementalVideo\Tests;
 
 use SilverStripe\Dev\FunctionalTest;
 
