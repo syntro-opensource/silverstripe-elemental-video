@@ -9,4 +9,26 @@
 
 Provides a video Block for including a video.
 
-> In the process of being created
+## Introduction
+Template repository for a Silverstripe Module.
+
+## Installation
+
+To install this module, run the following command:
+```
+composer require syntro/silverstripe-elemental-video
+```
+
+
+## Features
+This module features a block for the elemental editor which is intended to add
+a video to your page.
+
+
+
+## Documentation
+
+### Custom Styling
+to render this block the way you want, create a
+`templates/Syntro/SilverstripeElementalVideo/Element/Video.ss`
+file.
