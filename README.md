@@ -9,8 +9,6 @@
 
 Provides a video Block for including a video.
 
-## Introduction
-Template repository for a Silverstripe Module.
 
 ## Installation
 
