@@ -20,7 +20,7 @@ use DNADesign\Elemental\Models\BaseElement;
  */
 class Video extends BaseElement
 {
-    const YT_PATTERN = '/^https:\/\/(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]+)/';
+    const YT_PATTERN = '/^https:\/\/(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{6,})/';
 
     /**
      * Defines the database table name
