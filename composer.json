@@ -9,14 +9,12 @@
         }
     ],
     "require": {
-        "dnadesign/silverstripe-elemental": "^4",
-        "silverstripe/cms": "^4",
-        "silverstripe/framework": "^4",
-        "unclecheese/display-logic": "^2"
+        "dnadesign/silverstripe-elemental": "^5",
+        "unclecheese/display-logic": "^3"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0",
-        "syntro/silverstripe-phpstan": "^1",
+        "syntro/silverstripe-phpstan": "^5",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
